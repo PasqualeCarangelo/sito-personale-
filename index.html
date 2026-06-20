@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasquale Carangelo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="asset/fav.png">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>PASQUALE CARANGELO</h1>
+                    <span class="subtitle" data-i18n="subtitle">Photographer</span>
+                </a>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span class="lang-btn active" data-lang="IT">IT</span>
+                <span class="lang-divider">|</span>
+                <span class="lang-btn" data-lang="EN">EN</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu-overlay" id="menuOverlay">
+        <div class="menu-close" id="menuClose">&#10005;</div>
+        <ul>
+            <li><a data-i18n="menu-bio" href="bio.html">Bio</a></li>
+            <li><a data-i18n="menu-works" href="works.html">Works</a></li>
+            <li><a data-i18n="menu-beyond" href="#">Beyond Frames</a></li>
+            <li><a data-i18n="menu-contacts" href="contacts.html">Contacts</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="slideshow-container">
+            <div class="slideshow-track" id="slideshowTrack">
+                <img src="asset/foto_home/home1.jpg" alt="Home 1">
+                <img src="asset/foto_home/home2.jpg" alt="Home 2">
+                <img src="asset/foto_home/home3.jpg" alt="Home 3">
+                <img src="asset/foto_home/home4.jpg" alt="Home 4">
+                <img src="asset/foto_home/home5.jpg" alt="Home 5">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p data-i18n="footer">© 2026 Pasquale Carangelo Photography. All Rights Reserved. No part of this website, including text and images, may be reproduced or used without prior written permission.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
