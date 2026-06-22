@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page-title-beyond">Oltre la Cornice | Pasquale Carangelo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="asset/fav.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>PASQUALE CARANGELO</h1>
+                    <span class="subtitle" data-i18n="subtitle">Photographer</span>
+                </a>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span class="lang-btn active" data-lang="IT">IT</span>
+                <span class="lang-divider">|</span>
+                <span class="lang-btn" data-lang="EN">EN</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu-overlay" id="menuOverlay">
+        <div class="menu-close" id="menuClose">&#10005;</div>
+        <ul>
+            <li><a data-i18n="menu-bio" href="bio.html">Bio</a></li>
+            <li><a data-i18n="menu-works" href="works.html">Works</a></li>
+            <li><a data-i18n="menu-beyond" href="beyond-frames.html">Beyond Frames</a></li>
+            <li><a data-i18n="menu-contacts" href="contacts.html">Contacts</a></li>
+        </ul>
+    </nav>
+
+    <main class="page-content">
+        <div class="beyond-content" id="beyondContent">
+            <h2 class="beyond-title" data-i18n="beyond-title">Oltre la Cornice</h2>
+            <p class="beyond-sinossi" data-i18n="beyond-sinossi">Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard del settore sin dal 1966, quando i designer della Letraset e James Mosley, bibliotecario della St Bride Printing Library di Londra, presero una traduzione del 1914 di Cicerone e la rimaneggiarono per creare un testo segnaposto per i fogli Body Type della Letraset. È sopravvissuto non solo a molti decenni, ma anche al passaggio all'impaginazione elettronica, rimanendo sostanzialmente invariato. È stato reso popolare grazie a questi fogli e più recentemente dal software di editoria desktop, incluse le versioni di Lorem Ipsum.</p>
+
+            <div class="frame-layout">
+                <div class="frame-gallery" id="frameGallery">
+                    <div class="frame-thumb active" data-frame="1">
+                        <img src="asset/foto_frame/frame1.jpg" alt="Frame 1">
+                    </div>
+                    <div class="frame-thumb" data-frame="2">
+                        <img src="asset/foto_frame/frame2.jpg" alt="Frame 2">
+                    </div>
+                    <div class="frame-thumb" data-frame="3">
+                        <img src="asset/foto_frame/frame3.jpg" alt="Frame 3">
+                    </div>
+                    <div class="frame-thumb" data-frame="4">
+                        <img src="asset/foto_frame/frame4.jpg" alt="Frame 4">
+                    </div>
+                    <div class="frame-thumb" data-frame="5">
+                        <img src="asset/foto_frame/frame5.jpg" alt="Frame 5">
+                    </div>
+                </div>
+                <div class="frame-preview" id="framePreview">
+                    <img src="asset/foto_frame/frame1.jpg" alt="" id="framePreviewImage">
+                    <div class="puzzle-overlay" id="puzzleOverlay"></div>
+                </div>
+                <div class="frame-controls" id="frameControls">
+                    <button class="btn-genera" data-i18n="btn-4" data-pieces="4">Genera 4 pezzi</button>
+                    <button class="btn-genera" data-i18n="btn-8" data-pieces="8">Genera 8 pezzi</button>
+                    <button class="btn-genera" data-i18n="btn-12" data-pieces="12">Genera 12 pezzi</button>
+                    <button class="btn-genera" data-i18n="btn-16" data-pieces="16">Genera 16 pezzi</button>
+                    <button class="btn-genera" data-i18n="btn-20" data-pieces="20">Genera 20 pezzi</button>
+                    <button class="btn-download" data-i18n="btn-download" id="btnDownload">Scarica immagine</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p data-i18n="footer">© 2026 Pasquale Carangelo Photography. All Rights Reserved. No part of this website, including text and images, may be reproduced or used without prior written permission.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

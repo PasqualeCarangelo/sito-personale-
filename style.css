@@ -487,6 +487,252 @@ main {
     opacity: 0.4;
 }
 
+.beyond-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.beyond-title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.beyond-sinossi {
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.frame-layout {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.frame-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    margin-left: 3rem;
+}
+
+.frame-thumb {
+    width: 80px;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.2s ease;
+}
+
+.frame-thumb.active {
+    border-color: #000;
+}
+
+.frame-thumb:hover {
+    z-index: 10;
+}
+
+.frame-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.frame-thumb:hover img {
+    transform: scale(2.2);
+}
+
+.frame-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    justify-content: flex-start;
+    min-width: 140px;
+    margin-right: 3rem;
+}
+
+.btn-genera {
+    padding: 0.6rem 1rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-genera:hover {
+    opacity: 0.7;
+}
+
+.btn-download {
+    margin-top: 2rem;
+    padding: 0.7rem 1rem;
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-download:hover {
+    background: #000;
+    color: #fff;
+}
+
+.frame-preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 600px;
+}
+
+.puzzle-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 600px;
+    display: none;
+}
+
+.puzzle-overlay.active {
+    display: block;
+}
+
+.frame-preview img {
+    display: block;
+    width: 900px;
+    height: 600px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .frame-layout {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .frame-gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .frame-thumb {
+        width: calc(20% - 0.4rem);
+        flex-shrink: 0;
+    }
+}
+
+.frame-gallery {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.frame-thumb {
+    width: 90px;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    position: relative;
+    z-index: 1;
+    transition: z-index 0s;
+}
+
+.frame-thumb:hover {
+    overflow: visible;
+    z-index: 10;
+}
+
+.frame-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.frame-thumb:hover img {
+    transform: scale(2.2);
+}
+
+@media (max-width: 768px) {
+    .frame-thumb {
+        width: 75px;
+    }
+
+    .frame-gallery-wrap {
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+
+    .frame-gallery {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .frame-thumb {
+        width: calc(33% - 0.4rem);
+    }
+
+    .frame-gallery-wrap {
+        padding: 0.8rem;
+    }
+
+    .frame-gallery {
+        gap: 0.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .beyond-title {
+        font-size: 1.5rem;
+    }
+
+    .beyond-sinossi {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .beyond-title {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+}
+
 footer {
     text-align: center;
     padding: 1.5rem;

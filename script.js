@@ -6,6 +6,15 @@ var translations = {
         'menu-beyond': 'Oltre la Cornice',
         'menu-contacts': 'Contatti',
         footer: '© 2026 Pasquale Carangelo Photography. Tutti i diritti riservati. Nessuna parte di questo sito web, inclusi testi e immagini, può essere riprodotta o utilizzata senza previa autorizzazione scritta.',
+        'page-title-beyond': 'Oltre la Cornice | Pasquale Carangelo',
+        'beyond-title': 'Oltre la Cornice',
+        'btn-4': 'Genera 4 pezzi',
+        'btn-8': 'Genera 8 pezzi',
+        'btn-12': 'Genera 12 pezzi',
+        'btn-16': 'Genera 16 pezzi',
+        'btn-20': 'Genera 20 pezzi',
+        'btn-download': 'Scarica immagine',
+        'beyond-sinossi': 'Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard del settore sin dal 1966, quando i designer della Letraset e James Mosley, bibliotecario della St Bride Printing Library di Londra, presero una traduzione del 1914 di Cicerone e la rimaneggiarono per creare un testo segnaposto per i fogli Body Type della Letraset. È sopravvissuto non solo a molti decenni, ma anche al passaggio all\'impaginazione elettronica, rimanendo sostanzialmente invariato. È stato reso popolare grazie a questi fogli e più recentemente dal software di editoria desktop, incluse le versioni di Lorem Ipsum.',
         'page-title-bio': 'Bio | Pasquale Carangelo',
         'bio-p1': 'Pasquale Carangelo (Santa Maria Capua Vetere, 1994) è un fotografo documentarista originario di Maddaloni. Attraverso un linguaggio visivo prevalentemente in bianco e nero, ritrae il Sud Italia, esplorandone identità, tradizioni e spiritualità con uno sguardo intimo e contemporaneo.',
         'bio-p2': 'Nel 2022 ha presentato la sua prima mostra personale, Vedo Sud, presso la galleria Arte Visivi di Matera, curata da Stefano Cavalleri. Nel 2023 ha pubblicato il libro fotografico Sacro Sud (Psicografici Editore), un viaggio visivo attraverso i rituali religiosi del Meridione, sviluppato in tre anni tra Campania e Sicilia.',
@@ -31,6 +40,15 @@ var translations = {
         'menu-beyond': 'Beyond Frames',
         'menu-contacts': 'Contacts',
         footer: '© 2026 Pasquale Carangelo Photography. All Rights Reserved. No part of this website, including text and images, may be reproduced or used without prior written permission.',
+        'page-title-beyond': 'Beyond Frames | Pasquale Carangelo',
+        'beyond-title': 'Beyond Frames',
+        'btn-4': 'Generate 4 pieces',
+        'btn-8': 'Generate 8 pieces',
+        'btn-12': 'Generate 12 pieces',
+        'btn-16': 'Generate 16 pieces',
+        'btn-20': 'Generate 20 pieces',
+        'btn-download': 'Download image',
+        'beyond-sinossi': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset\'s Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software including versions of Lorem Ipsum.',
         'page-title-bio': 'Bio | Pasquale Carangelo',
         'bio-p1': 'Pasquale Carangelo (Santa Maria Capua Vetere, 1994) is a documentary photographer from Maddaloni. Through a predominantly black-and-white visual language, he portrays Southern Italy, exploring its identity, traditions, and spirituality with an intimate and contemporary perspective.',
         'bio-p2': 'In 2022, he presented his first solo exhibition, Vedo Sud, at the Arte Visivi gallery in Matera, curated by Stefano Cavalleri. In 2023, he published the photobook Sacro Sud (Psicografici Editore), a visual journey through the religious rituals of Southern Italy, developed over three years across Campania and Sicily.',
@@ -314,6 +332,184 @@ document.addEventListener('DOMContentLoaded', function () {
                 formFeedback.className = 'form-feedback error';
             });
         });
+    }
+
+    var frameGallery = document.getElementById('frameGallery');
+    var p5Instance = null;
+
+    function clearPuzzle() {
+        if (p5Instance) {
+            p5Instance.remove();
+            p5Instance = null;
+        }
+        var ov = document.getElementById('puzzleOverlay');
+        if (ov) ov.classList.remove('active');
+        var fi = document.getElementById('framePreviewImage');
+        if (fi) fi.style.display = '';
+    }
+
+    if (frameGallery) {
+        var frameThumbs = frameGallery.querySelectorAll('.frame-thumb');
+        var framePreviewImage = document.getElementById('framePreviewImage');
+
+        for (var f = 0; f < frameThumbs.length; f++) {
+            (function (thumb) {
+                thumb.addEventListener('click', function () {
+                    clearPuzzle();
+                    for (var t = 0; t < frameThumbs.length; t++) {
+                        frameThumbs[t].classList.remove('active');
+                    }
+                    thumb.classList.add('active');
+                    var index = parseInt(thumb.getAttribute('data-frame'));
+                    framePreviewImage.src = 'asset/foto_frame/frame' + index + '.jpg';
+                });
+            })(frameThumbs[f]);
+        }
+    }
+
+    var frameControls = document.getElementById('frameControls');
+    if (frameControls) {
+        var buttons = frameControls.querySelectorAll('.btn-genera');
+
+        function generaPezzi(n) {
+            clearPuzzle();
+            var src = document.getElementById('framePreviewImage').getAttribute('src');
+            if (!src) return;
+
+            var overlay = document.getElementById('puzzleOverlay');
+            overlay.classList.add('active');
+            var previewImg = document.getElementById('framePreviewImage');
+            previewImg.style.display = 'none';
+            var W = 900, H = 600;
+
+            p5Instance = new p5(function (p) {
+                var img;
+                var pieces = [];
+                var cols, rows, pw, ph;
+                var dragIdx = -1;
+
+                function factorPair(m) {
+                    var bestR = 1, bestC = m;
+                    for (var r = 1; r <= Math.sqrt(m); r++) {
+                        if (m % r === 0) {
+                            var c = m / r;
+                            if (Math.abs(c - r) < Math.abs(bestC - bestR)) {
+                                bestR = r;
+                                bestC = c;
+                            }
+                        }
+                    }
+                    return { rows: bestR, cols: bestC };
+                }
+
+                function slotAt(mx, my) {
+                    var c = Math.floor(p.constrain(mx, 0, W - 0.001) / pw);
+                    var r = Math.floor(p.constrain(my, 0, H - 0.001) / ph);
+                    return r * cols + c;
+                }
+
+                function swapSlots(a, b) {
+                    var tx = pieces[a].x, ty = pieces[a].y;
+                    var tg = pieces[a].gridSlot;
+                    pieces[a].x = pieces[b].x;
+                    pieces[a].y = pieces[b].y;
+                    pieces[a].gridSlot = pieces[b].gridSlot;
+                    pieces[b].x = tx;
+                    pieces[b].y = ty;
+                    pieces[b].gridSlot = tg;
+                }
+
+                p.preload = function () {
+                    img = p.loadImage(src);
+                };
+
+                p.setup = function () {
+                    var c = p.createCanvas(W, H);
+                    c.parent('puzzleOverlay');
+                    var fp = factorPair(n);
+                    rows = fp.rows;
+                    cols = fp.cols;
+                    pw = W / cols;
+                    ph = H / rows;
+
+                    for (var r = 0; r < rows; r++) {
+                        for (var col = 0; col < cols; col++) {
+                            pieces.push({
+                                srcX: col * (img.width / cols),
+                                srcY: r * (img.height / rows),
+                                sw: img.width / cols,
+                                sh: img.height / rows,
+                                x: col * pw,
+                                y: r * ph,
+                                gridSlot: r * cols + col
+                            });
+                        }
+                    }
+                };
+
+                p.draw = function () {
+                    p.background(255);
+                    for (var i = 0; i < pieces.length; i++) {
+                        var pi = pieces[i];
+                        p.image(img, pi.x, pi.y, pw, ph, pi.srcX, pi.srcY, pi.sw, pi.sh);
+                        p.stroke(255);
+                        p.strokeWeight(4);
+                        p.noFill();
+                        p.rect(pi.x, pi.y, pw, ph);
+                    }
+                };
+
+                p.mousePressed = function () {
+                    for (var i = pieces.length - 1; i >= 0; i--) {
+                        var pi = pieces[i];
+                        if (p.mouseX >= pi.x && p.mouseX <= pi.x + pw &&
+                            p.mouseY >= pi.y && p.mouseY <= pi.y + ph) {
+                            dragIdx = i;
+                            break;
+                        }
+                    }
+                };
+
+                p.mouseDragged = function () {
+                    if (dragIdx >= 0) {
+                        var s = slotAt(p.mouseX, p.mouseY);
+                        if (s !== pieces[dragIdx].gridSlot) {
+                            for (var i = 0; i < pieces.length; i++) {
+                                if (pieces[i].gridSlot === s) {
+                                    swapSlots(dragIdx, i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                };
+
+                p.mouseReleased = function () {
+                    dragIdx = -1;
+                };
+            });
+        }
+
+        for (var b = 0; b < buttons.length; b++) {
+            (function (btn) {
+                btn.addEventListener('click', function () {
+                    var n = parseInt(btn.getAttribute('data-pieces'));
+                    generaPezzi(n);
+                });
+            })(buttons[b]);
+        }
+
+        var downloadBtn = document.getElementById('btnDownload');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function () {
+                if (p5Instance && p5Instance.canvas) {
+                    var link = document.createElement('a');
+                    link.download = 'frame_ricomposta.jpg';
+                    link.href = p5Instance.canvas.toDataURL('image/jpeg', 0.95);
+                    link.click();
+                }
+            });
+        }
     }
 
     applyTranslation(currentLang);
